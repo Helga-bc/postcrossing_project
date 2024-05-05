@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class='block-content'>
+  {% if form.errors %}
+    <p>Ваше имя пользователя и пароль не совпадает. Пожалуйста, повторите попытку.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <br>
+      <p>Войдите чтобы просматривать эту страницу</p>
+      <br>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    
+      <div class="login-form-input">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+      <div class="login-form-input">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+      </div>
+    
+    <input type="submit" value="Вход" />
+    <input type="hidden" name="next" value="/" />
+  </form>
+  
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Добавить открытку
+{% endblock %}
+
+{% block content %}   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <h4>На этой странице вы можете добавить новую открытку: </h4>
+    <br>
+    {% if user.is_authenticated %}
+    <h3>Заполните, пожалуйста, форму: </h3>
+
+ <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        {{ form.non_field_errors }}
+        <button type="submit">Add</button> 
+    {%else%}
+    <br>
+    <br>
+    <h4>Пожалуйста, чтобы добавить новую открытку выполните вход на сайт!</h4>
+    {% endif %}
+    </form>
+    
+{% endblock %}

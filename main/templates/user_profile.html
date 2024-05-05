@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Мой профиль{% endblock %}
+
+ {% block content %} 
+
+{% if user.is_authenticated %} 
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+      <p>Здравствуйте, {{user.first_name}}</p>
+      <p>Последний раз вы заходили: {{user.last_login}}</p>
+      <p>У вас сейчас {{user_profile.experience}} очков опыта.</p>
+      <br>
+      <br>
+      <p>Информация обо мне:</p>
+      <p>{% if user_profile.name%}</p>
+      <p>Имя: {{user_profile.name}}</p>
+      {% else %}
+      <p>Имя: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if user_profile.country%}</p>
+      <p>Cтрана: {{user_profile.country}}</p>
+      {% else %}
+      <p>Cтрана: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if user_profile.city%}</p>
+      <p>Город: {{user_profile.city}}</p>
+      {% else %}
+      <p>Город: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if user_profile.street%}</p>
+      <p>Улица: {{user_profile.street}}</p>
+      {% else %}
+      <p>Улица: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if user_profile.mail_index%}</p>
+      <p>Почтовый индекс: {{user_profile.mail_index}}</p>
+      {% else %}
+      <p>Почтовый индекс: информация отсутствует</p>
+      {%endif%} 
+      <br>
+      <p>Если информация о вас отсутствует вы не можете учавствавать в посткроссинге</p>
+
+      <h2><button><a href="{% url 'user_profile_info' user.id %}?next={{request.path}}">Добавить/Обновить информацию в профиль</a></button></h2> 
+  <br>
+  
+  <p>{% if user_postcards%}</p>
+  <p>Мои открытки:</p>
+  
+  {% for postcard in user_postcards %}
+    <a href="{% url 'get_postcard' postcard.id %}">
+    <img src="{{postcard.image.url}}" width="80px"></a>
+  {% endfor %}
+  {% else %}
+  <p>Тут появятся ваши открытки, когда вы их добавите.</p>
+  {%endif%} 
+
+
+{% else %}
+<h2>Чтобы просматривать эту страницу ,пожалуйста, выполните вход на сайт!</h2>
+
+{% endif %}
+{% endblock %}
+

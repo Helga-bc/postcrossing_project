@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Все открытки
+{% endblock %}
+
+{% block content %}   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+    {% for postcard in postcards %}
+    <a href="{% url 'get_postcard' postcard.id %}">
+    <img src="{{postcard.image.url}}" width="80px"></a>
+    {% endfor %}
+
+{% endblock %} 
+

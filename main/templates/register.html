@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Создать аккаунт{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <h3>Создайте аккаунт и присоединяйтесь к сообществу посткроссинга</h3>
+    <br>
+    <h3>Пожалуйста, заполните форму:</h3>
+    <br>
+    <form action="." method="post">
+        {{ user_form.as_p }}
+        {% csrf_token %}
+        <h3><p><input style="width:180px;height:25px"  type="submit" value="Создать мой аккаунт"></p></h3>
+    </form>
+{% endblock %}

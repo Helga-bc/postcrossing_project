@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Профиль {{ get_user_profile.user.username }} {% endblock %}
+
+{% block content %} 
+{% if user.is_authenticated %} 
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+      <p>Профиль пользователя {{ get_user_profile.user.username }}</p>
+      <p>Последний раз заходил: {{get_user_profile.user.last_login}}</p>
+      <p>У {{ get_user_profile.user.username }} сейчас {{ get_user_profile.experience}} очков опыта.</p>
+      <br>
+      <br>
+      <p>Контактная информация пользователя:</p>
+      <p>{% if get_user_profile.name%}</p>
+      <p>Имя: {{get_user_profile.name}}</p>
+      {% else %}
+      <p>Имя: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if get_user_profile.country%}</p>
+      <p>Cтрана: {{get_user_profile.country}}</p>
+      {% else %}
+      <p>Cтрана: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if get_user_profile.country%}</p>
+      <p>Город: {{get_user_profile.country}}</p>
+      {% else %}
+      <p>Город: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if get_user_profile.street%}</p>
+      <p>Улица: {{get_user_profile.street}}</p>
+      {% else %}
+      <p>Улица: информация отсутствует</p>
+      {%endif%} 
+
+      <p>{% if get_user_profile.mail_index%}</p>
+      <p>Почтовый индекс: {{get_user_profile.mail_index}}</p>
+      {% else %}
+      <p>Почтовый индекс: информация отсутствует</p>
+      {%endif%} 
+      <br>
+
+  <br>
+  <p>{% if user_postcards%}</p>
+  <p>Открытки пользователя:</p>
+  
+  {% for postcard in user_postcards %}
+
+    <a href="{% url 'get_postcard' postcard.id %}">
+    <img src="{{postcard.image.url}}" width="80px"></a>
+
+  {% endfor %}
+  {% else %}
+  <p>Пользователь пока не добавил ни одной открытки</p>
+  {%endif%} 
+
+{% else %}
+<br>
+<br>
+<br>
+<br>
+<h2>Чтобы просматривать эту страницу ,пожалуйста, выполните вход на сайт!</h2>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+        Главная страница
+{% endblock %}
+
+{% block content %}  
+<br>
+<br>
+<br>
+<div  class="welcome" >        
+         Добро пожаловать на сайт по потскроссингу!
+         <br>
+       
+        Регистрируйтесь на сайте, заполняйте профиль и обменивайтесь открытками с людьми со всего мира.
+        <br>
+        <br>
+        <br>
+</div>
+<br>
+
+<div class= 'some_text'>
+
+        <a>Чтобы отправить открытку случайному пользователю, нажмите на кнопку:</a>
+</div>
+<br>
+<h2><button class='button'><a href="{% url 'generate_random_user' %}?next={{request.path}}">Выбрать пользователя</a></button></h2>  
+
+<br>
+<p>Посткроссинг в цифрах:</p>
+<p>Зарегистрированных пользователей: {{count_users}}</p>
+<p>Пользователи из {{users_country}} стран</p>
+<p>Добавлено открыток: {{count_postcards}}</p>
+<p>Открытки из: {{count_countries}} стран </p>
+
+<br>
+
+<p class="last_added">
+        Последние добавленные отрытки:
+{% for last in last_added %}
+
+        <a href="{% url 'get_postcard' last.id %}">
+        <img src="{{last.image.url}}" width="120px"></a>
+
+{% endfor %}
+</p>
+
+{% endblock %}

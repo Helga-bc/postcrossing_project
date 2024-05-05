@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+        Отправить открытку для:
+{% endblock %}
+
+{% block content %}  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<p>Иии.... случайным пользователем выбран:</p>
+
+<p>&#127881;--- {{winner_user.name}} --- &#127881; </p>
+<p>Отправьте открытку этому пользователю.</p>
+<p>Вот необходимая информация:</p>
+<br>
+<p>{{winner_user.country}}</p>
+<p>{{winner_user.city}}</p>
+<p>{{winner_user.street}}</p>
+<p>{{winner_user.mail_index}}</p>
+
+<br>
+<p>ВАЖНО!</p>
+<p>Не забудьте указать на открытке свой id!</p>
+{% if user.is_authenticated %} 
+<br>
+<p>Ваш id: {{user.id}}</p>
+<br>
+<p>Когда открытку добавят на сайт, вам будет начислено 100 очков опыта!!!!!</p>
+{%else%}
+<br>
+<br>
+<br>
+<br>
+
+<p>Если вы еще не зарегистрированы, то пройдите регистрацию   <a href="{% url 'registration' %}?next=/"> ->>Регистрация</a></p>  
+
+<p>Или выполните вход на сайт   <a href="{% url 'login' %}?next={{request.path}}">-->Вход</a></p>
+
+<p>Когда открытку добавят на сайт, вам будет начислено 100 очков опыта!!!!!</p>
+{%endif%}
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{postcard.country}}
+{% endblock %}
+
+{% block content %} 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <img src="{{postcard.image.url}}" width="150px">
+    <p>Страна: {{postcard.country}} </p> 
+    <p>Описание: {{postcard.description}}</p> 
+    <p>Добавлена пользователем <a href="{% url 'get_userprofile' postcard.owner_id %}?next={{request.path}}">{{postcard.owner.user.username}} </a></p>
+    <p>Дата добавления: {{postcard.created_at}}</p>
+<br>
+<br>
+<div> 
+    <form action="{% url 'add_comment' postcard.id %}" method="post">
+        {% csrf_token %}
+             <textarea name ="content" class='add_comment' placeholder="Оставить комментарий" required></textarea>
+             <br>
+            {%if request.user.is_authenticated %}
+            <input type="submit" value="Добавить комментарий">
+            {%else%}
+            <p>Войдите на сайт, чтобы оставить комментарий! </p>
+            {% endif %}
+    </form>
+</div>
+
+<br>
+<br>
+
+{% if postcard.comments.all %}
+Комментарии:
+     {% for comment in postcard.comments.all %}
+    <div style="border: 1px solid black; width: 300px; margin-bottom: 10px; padding: 10px">
+        <p> {{ comment.content }} </p>
+        <br>
+        <p>Комментарий от <a href="{% url 'get_userprofile' comment.user.id %}?next={{request.path}}">{{ comment.user }} </a></p>
+        <p> {{ comment.date_created }} </p>
+    </div>
+    {% endfor %} 
+ {% else %}
+<p>Тут пока никто не оставил комментарий!</p>
+{% endif %}
+
+{% endblock %}
